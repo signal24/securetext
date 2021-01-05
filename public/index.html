@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>securetext.io</title>
+</head>
+<body x-data="app()" x-init="init">
+    <h2>securetext.io</h2>
+
+    <template x-if="error">
+        <main class="error" x-text="error"></main>
+    </template>
+
+    <template x-if="!error">
+        <main>
+            <template x-if="role == 'sender'">
+                <div class="sender">
+                    <template x-if="!hasFinished">
+                        <div class="invite">
+                            Send this link to the recipient:<br/>
+                            <div id="link-container">
+                                <input x-ref="link" x-model="link" type="text" readonly="true" @click="shareLink">
+                            </div>
+                        </div>
+                    </template>
+
+                    <form>
+                        <textarea x-model="messageInput" :readonly="hasFinished ? 'true' : null"></textarea>
+
+                        <template x-if="isConnected">
+                            <div>
+                                <template x-if="!hasFinished">
+                                    <div class="status">
+                                        <div>For security, verify the magic numbers<br />with the receiver before sending:</div>
+                                        <div x-text="magicNumbers.join(' ')" class="magic-numbers"></div>
+                                        <input class="send" type="submit" value="Send" @click="sendMessage">
+                                    </div>
+                                </template>
+
+                                <template x-if="hasFinished">
+                                    <div class="done">Sent!</div>
+                                </template>
+                            </div>
+                        </template>
+                    </form>
+
+                    <template x-if="!isConnected">
+                        <div class="status">
+                            <div>Waiting for recipient to connect...</div>
+                            <div class="loader-wrap"><div class="loader"></div></div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <template x-if="role == 'receiver'">
+                <div class="status">
+                    <template x-if="!isConnected">
+                        <div>
+                            Connecting...
+                        </div>
+                    </template>
+
+                    <template x-if="isConnected">
+                        <div>
+                            <template x-if="!message">
+                                <div>
+                                    <div>Provide the magic numbers to the sender.</div>
+                                    <div x-text="magicNumbers.join(' ')" class="magic-numbers"></div>
+                                    <div class="status">Waiting for message...</div>
+                                <div>
+                            </template>
+
+                            <template x-if="message">
+                                <textarea x-model="message" readonly="true"></textarea>
+                            </template>
+                        </div>
+                    </template>
+
+                    <template x-if="!isConnected || !message">
+                        <div class="loader-wrap"><div class="loader"></div></div>
+                    </template>
+                </div>
+            </template>
+        </main>
+    </template>
+
+    <div id="question-mark" @click="showAbout">?</div>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-base64@3.6.0/base64.min.js"></script>
+    <script src="https://bundle.run/copy-to-clipboard@3.3.1"></script>
+    <script src="script.js"></script>
+</body>
+</html>
