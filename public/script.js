@@ -26,6 +26,7 @@ function app() {
             this.textDecoder = new TextDecoder();
 
             window.addEventListener('hashchange', () => location.reload());
+            setTimeout(() => this.$refs.message.focus(), 100);
         },
 
         _handleWsOpened() {
@@ -104,6 +105,7 @@ function app() {
                 }, 1000);
 
                 copyToClipboard(this.link);
+                this.$refs.message.focus();
             }
         },
 

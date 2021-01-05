@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACFklEQVRYCe1Vu04bQRQ9s16vsYBIhhQY5JCCIlIU5Q+C+AACIS10iAJBqjgdFR1QpUiRLkp6lChCokHwCSksUYSC2IAUHm4Q4H14cmfxDLPLrmKMLZodaTX3cXzPmbt3x0Cykg4kHXjgDrBO8Ofm9p54prkC8NHr+mzHhFM8+zRSDvO1XUDf/O+CC/MXEeVCZFUT7suwCCMEurfrIr3aIN9wXQyKh/wNEWvkAhxtFyDbTsSzF5+fHolH2Nes/FWAnZwOCMCAIBHEkkyz8zIm904IkLWb2ts3hB95xjKwDMcrcjMVSc5cD0inVu06lvCO1QTIjES2EBTknKOIGHJR0hdGGMLCBj6IWPteAceMKNjU4piWONWBUolbqZ7qMsBEoVvDIn8Qt7/4EcwYFzVYlb90RANOvg9ed1YBuFZfdaBBLtpyZ3JVWTOsg2Mwrw7m0Nd/cKplgqYS0Dh5MHsfj2nzbWh2qKYm4Obkb7Z78WUvg9dbvT48zp8iXNyyhx6rlJPvV3bY0AWo3GTBxlopi7fDNKu04vwJwsWtejajUl53l7LDRqSA72UL759fYv2P5eP/54eLSl+I0IXIuL6rl7O7Xz2kRMsDOLb5CCe1yPPofL5NpEf2IhN/Uvo9wL/eQt4hMF5wmkczfJNgdQ9457kl+hQp3to9sPDs0q/5s5LG8VV0J8TJQeT+VSwVJHvSgaQDD92Bf44mnqSZSIh/AAAAAElFTkSuQmCC">
     <link rel="stylesheet" href="/style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -29,7 +30,7 @@
                     </template>
 
                     <form>
-                        <textarea x-model="messageInput" :readonly="hasFinished ? 'true' : null"></textarea>
+                        <textarea x-ref="message" x-model="messageInput" :readonly="hasFinished ? 'true' : null"></textarea>
 
                         <template x-if="isConnected">
                             <div>
