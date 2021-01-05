@@ -14,7 +14,7 @@ function app() {
             const senderId = location.hash.length > 2 ? location.hash.substr(1) : null;
             const url = senderId ? `${baseUrl}?sender=${senderId}` : baseUrl;
 
-            if (senderId ? this.role = 'receiver' : this.role = 'sender');
+            this.role = senderId ? 'receiver' : 'sender';
 
             this.ws = new WebSocket(url);
             this.ws.addEventListener('open', this._handleWsOpened.bind(this));
